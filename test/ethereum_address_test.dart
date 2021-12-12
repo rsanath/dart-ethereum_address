@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import "package:convert/convert.dart" show hex;
 import "package:ethereum_address/ethereum_address.dart";
 import "package:test/test.dart";
@@ -18,7 +20,7 @@ void main() {
             "0x0000de016A766eA5dE351835912b92696225f916"
       }).forEach((publicKey, address) {
         expect(
-          ethereumAddressFromPublicKey(hex.decode(publicKey)),
+          ethereumAddressFromPublicKey(hex.decode(publicKey) as Uint8List),
           equals(address),
         );
       });
@@ -38,7 +40,7 @@ void main() {
             "0x0000de016A766eA5dE351835912b92696225f916"
       }).forEach((publicKey, address) {
         expect(
-          ethereumAddressFromPublicKey(hex.decode(publicKey)),
+          ethereumAddressFromPublicKey(hex.decode(publicKey) as Uint8List),
           equals(address),
         );
       });
@@ -80,7 +82,7 @@ void main() {
           () => checksumEthereumAddress(address),
           throwsA(
             predicate(
-              (e) =>
+              (dynamic e) =>
                   e is ArgumentError &&
                   e.name == "address" &&
                   e.message == "invalid address",

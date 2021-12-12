@@ -21,6 +21,6 @@ Uint8List decompressPublicKey(Uint8List publicKey) {
     throw ArgumentError.value(publicKey, "publicKey", "invalid public key");
   }
 
-  final ecPublicKey = ECCurve_secp256k1().curve.decodePoint(publicKey);
+  final ecPublicKey = ECCurve_secp256k1().curve.decodePoint(publicKey)!;
   return ecPublicKey.getEncoded(false);
 }
